@@ -1,5 +1,5 @@
 import { Product } from '@app/database/entities/products/products.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductsDto } from './dto/products.dto';
@@ -21,6 +21,18 @@ export class ProductsService {
   async getProducts() {
     const products = await this._productRepo.find();
     return {
+      message: 'Products fetched successfully',
+      products,
+    };
+  }
+
+  async getProductsByUserId(userId: string) {
+    const products = await this._productRepo.find({
+      where: { userId },
+    });
+
+    return {
+      status: HttpStatus.OK,
       message: 'Products fetched successfully',
       products,
     };

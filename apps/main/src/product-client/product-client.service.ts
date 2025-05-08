@@ -15,4 +15,8 @@ export class ProductGatewayService {
   async getAllProducts() {
     return this.client.send({ cmd: 'get products' }, {});
   }
+
+  async getAllProductsByUserId(userId: string) {
+    return this.client.send({ cmd: 'get products by user' }, userId);
+  }
 }

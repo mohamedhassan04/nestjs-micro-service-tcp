@@ -26,4 +26,14 @@ export class ProductsController {
       console.log(error);
     }
   }
+
+  // @desc Get all products
+  @MessagePattern({ cmd: 'get products by user' })
+  async getProductsByUserId(@Payload() userId: string) {
+    try {
+      return await this.productsService.getProductsByUserId(userId);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

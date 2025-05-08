@@ -11,4 +11,6 @@ export class Product extends Node {
   price: number;
   @Column({ nullable: true })
   description: string;
+  @Column({ nullable: true })
+  userId: string;
 }
