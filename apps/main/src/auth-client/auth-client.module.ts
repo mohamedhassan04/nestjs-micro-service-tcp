@@ -12,13 +12,17 @@ import { AuthClientController } from './auth-client.controller';
         name: 'AUTH_SERVICE',
         imports: [ConfigModule],
         inject: [ConfigService],
-        useFactory: () => ({
-          transport: Transport.TCP,
-          options: {
-            host: 'localhost',
-            port: 3001,
-          },
-        }),
+        useFactory: (config: ConfigService) => {
+          const host = config.get<string>('SERVICE_HOST');
+          const port = config.get<number>('AUTH_SERVICE_PORT');
+          return {
+            transport: Transport.TCP,
+            options: {
+              host,
+              port,
+            },
+          };
+        },
       },
     ]),
   ],
